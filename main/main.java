@@ -3,6 +3,7 @@ package main;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import java.awt.Image;
 
 public class main {
 
@@ -24,5 +25,7 @@ public class main {
         gamePanel gamePanel = new gamePanel();
         window.add(gamePanel);
         window.pack(); // Sizes the window so all contents are at the prferred size
+
+        gamePanel.startGameThread();
     }
 }
