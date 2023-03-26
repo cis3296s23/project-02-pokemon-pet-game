@@ -33,12 +33,14 @@ public class gamePanel extends JPanel implements Runnable {
         this.setDoubleBuffered(true); // May improve performance
         this.addKeyListener(kh);
         this.setFocusable(true);
+        this.requestFocusInWindow();
     }
 
     // Game mechanics
     Thread gameThread;
 
     int FPS = 60;
+    double TIME_STEP = 1.0 / FPS;
 
     int petX = 512;
     int petY = 400;
@@ -52,35 +54,32 @@ public class gamePanel extends JPanel implements Runnable {
 
     @Override
     public void run() {
-        // Set up game loop to slow game down
-        // Set our time step to run in 60 FPS, game should update every .016 seconds
-        // instead of every nanosecond
-        final double TIME_STEP = 1.0 / FPS;
-        double accumulatedTime = 0;
-        long currentTime = System.nanoTime();
         long lastTime = System.nanoTime();
+        double accumulatedTime = 0;
 
-        // Game loop
-        // Every time we get to our time step update the game and reset accumulated time
-        // vairable, ensure game runs smoothly regardless of system
         while (gameThread != null) {
-            // Calculate elapsed time since last update
-            currentTime = System.nanoTime();
-            double elapsedTime = (currentTime - lastTime) / 1000000000.0;
+            long currentTime = System.nanoTime();
+            double deltaTime = (currentTime - lastTime) / 1000000000.0;
             lastTime = currentTime;
-            accumulatedTime += elapsedTime;
 
-            // Update game logic and reset accumulatedTime
+            accumulatedTime += deltaTime;
+
             while (accumulatedTime >= TIME_STEP) {
-                update(TIME_STEP);
+                update();
                 accumulatedTime -= TIME_STEP;
             }
 
             repaint();
+
+            try {
+                Thread.sleep(1);
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
         }
     }
 
-    public void update(double timeStep) {
+    public void update() {
 
         // Move to the left
         if (kh.leftPressed == true) {
