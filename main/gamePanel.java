@@ -89,6 +89,14 @@ public class gamePanel extends JPanel implements Runnable {
 
     public void update() {
 
+        // add a 20 ms delay to stop game from running too fast
+        try {
+            Thread.sleep(20);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
         // Move to the left
         if (kh.leftPressed == true) {
             petX = petX - petSpeed;
