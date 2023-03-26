@@ -23,6 +23,7 @@ public class keyHandler implements KeyListener {
         // Move to the left
         if (keyCode == KeyEvent.VK_A || keyCode == KeyEvent.VK_LEFT) {
             leftPressed = true;
+            System.out.println("Left key pressed");
         }
         // Move to the right
         if (keyCode == KeyEvent.VK_D || keyCode == KeyEvent.VK_RIGHT) {
