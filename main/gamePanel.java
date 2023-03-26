@@ -52,50 +52,35 @@ public class gamePanel extends JPanel implements Runnable {
 
     @Override
     public void run() {
-        // Need to slow down the game
-        // Divide 1 second by our FPS (60) to get .016 seconds
-        // Draw every .016 seconds instead of every nanosecond
-        double drawInterval = 1000000000 / FPS;
-        double nextDrawTime = System.nanoTime() + drawInterval;
+        // Set up game loop to slow game down
+        // Set our time step to run in 60 FPS, game should update every .016 seconds
+        // instead of every nanosecond
+        final double TIME_STEP = 1.0 / FPS;
+        double accumulatedTime = 0;
+        long currentTime = System.nanoTime();
+        long lastTime = System.nanoTime();
 
+        // Game loop
+        // Every time we get to our time step update the game and reset accumulated time
+        // vairable, ensure game runs smoothly regardless of system
         while (gameThread != null) {
+            // Calculate elapsed time since last update
+            currentTime = System.nanoTime();
+            double elapsedTime = (currentTime - lastTime) / 1000000000.0;
+            lastTime = currentTime;
+            accumulatedTime += elapsedTime;
 
-            long currentTime = System.nanoTime();
-
-            // Update
-            update();
-
-            // Draw
-            repaint();
-
-            // Need to slow down the game so we draw and update every .016 seconds instead
-            // of every nanosecond
-            try {
-                double remainingTime = nextDrawTime - System.nanoTime();
-                remainingTime = remainingTime / 1000000;
-
-                // If update and draw take more time no need to put thread to sleep
-                if (remainingTime < 0) {
-                    remainingTime = 0;
-                }
-                Thread.sleep((long) remainingTime);
-                nextDrawTime += drawInterval;
-            } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+            // Update game logic and reset accumulatedTime
+            while (accumulatedTime >= TIME_STEP) {
+                update(TIME_STEP);
+                accumulatedTime -= TIME_STEP;
             }
+
+            repaint();
         }
     }
 
-    public void update() {
-
-        // Add a 20 ms delay to slow the game down
-        try {
-            Thread.sleep(20);
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+    public void update(double timeStep) {
 
         // Move to the left
         if (kh.leftPressed == true) {
