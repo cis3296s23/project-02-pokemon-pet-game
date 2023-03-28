@@ -41,11 +41,17 @@ public class gamePanel extends JPanel implements Runnable {
     int FPS = 60;
 
     int petX = 512;
-    int petY = 400;
+    int petY = 230;
     int petSpeed = 10;
+
+    int jumpHeight = 10;
+    double jumpSpeed = -10;
+    int gravity = 15;
+    boolean isJumping = false;
 
     public void startGameThread() {
 
+        this.requestFocus();
         gameThread = new Thread(this);
         gameThread.start();
     }
@@ -84,19 +90,42 @@ public class gamePanel extends JPanel implements Runnable {
 
         // Move to the left
         if (kh.leftPressed == true) {
+            System.out.println(petX);
             petX = petX - petSpeed;
         }
         // Move to the right
         if (kh.rightPressed == true) {
+            System.out.println(petX);
             petX = petX + petSpeed;
         }
         // Jump
-        if (kh.jumpPressed == true) {
-            // Add jump functionality
+        if (kh.jumpPressed == true && !isJumping) {
+            // Set isJumping to true so we cant jump multiple times in air
+            isJumping = true;
+            petY -= jumpHeight;
+            jumpSpeed = -10;
+        }
+        // If jumping fall back down
+        if (isJumping) {
+            petY += (int) jumpSpeed;
+            jumpSpeed += gravity * timeStep;
+            // Don't fall past default height and set to false so we can jump again
+            if (petY >= 230) {
+                petY = 230;
+                isJumping = false;
+            }
         }
         // Make Noise
         if (kh.speakPressed == true) {
             // make noise
+        }
+
+        if (petX > 1024) {
+            System.out.println("hey");
+            petX = -200;
+        }
+        if (petX < -200) {
+            petX = 1024;
         }
     }
 
@@ -112,7 +141,7 @@ public class gamePanel extends JPanel implements Runnable {
         // Draw eevee
         ImageIcon ii = new ImageIcon("main/windowIcon.png");
         Image eevee = ii.getImage();
-        g2.drawImage(eevee, petX, petY, tileSize, tileSize, null);
+        g2.drawImage(eevee, petX, petY, tileSize * 4, tileSize * 4, null);
 
         g2.dispose();
     }
