@@ -25,6 +25,7 @@ public class gamePanel extends JPanel implements Runnable {
 
     keyHandler kh = new keyHandler();
     Color sky = new Color(28, 235, 235);
+    playerUI UI = new playerUI();
 
     public gamePanel() {
 
@@ -32,6 +33,7 @@ public class gamePanel extends JPanel implements Runnable {
         this.setBackground(sky);
         this.setDoubleBuffered(true); // May improve performance
         this.addKeyListener(kh);
+        this.add(UI);
         this.setFocusable(true);
     }
 
@@ -90,12 +92,10 @@ public class gamePanel extends JPanel implements Runnable {
 
         // Move to the left
         if (kh.leftPressed == true) {
-            System.out.println(petX);
             petX = petX - petSpeed;
         }
         // Move to the right
         if (kh.rightPressed == true) {
-            System.out.println(petX);
             petX = petX + petSpeed;
         }
         // Jump
@@ -121,7 +121,6 @@ public class gamePanel extends JPanel implements Runnable {
         }
 
         if (petX > 1024) {
-            System.out.println("hey");
             petX = -200;
         }
         if (petX < -200) {
@@ -142,6 +141,9 @@ public class gamePanel extends JPanel implements Runnable {
         ImageIcon ii = new ImageIcon("main/windowIcon.png");
         Image eevee = ii.getImage();
         g2.drawImage(eevee, petX, petY, tileSize * 4, tileSize * 4, null);
+
+        // Draw UI
+        UI.paint(g2);
 
         g2.dispose();
     }
