@@ -76,11 +76,6 @@ public class playerUI extends JPanel {
         int hungerlabelY = hungerBarY + (statuBarHeight - hungerlabelHeight) / 2 + hungerfm.getAscent();
         g2.drawString(hungerLabel, hungerlabelX, hungerlabelY);
 
-
-
-
-
-
         // Draw Happiness Bar
         g2.setColor(Color.PINK);
         g2.fillRect(happinessBarX, happinessBarY, statuBarWidth, statuBarHeight);
