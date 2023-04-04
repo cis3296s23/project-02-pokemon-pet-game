@@ -8,7 +8,6 @@ import java.awt.Image;
 public class main {
 
     public static void main(String[] args) {
-
         // Set up JFrame object
         JFrame window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

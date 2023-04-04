@@ -88,5 +88,4 @@ public class playerUI extends JPanel {
         int happinesslabelY = happinessBarY + (statuBarHeight - happinesslabelHeight) / 2 + hungerfm.getAscent();
         g2.drawString(happinessLabel, happinesslabelX, happinesslabelY);
     }
-
 }
