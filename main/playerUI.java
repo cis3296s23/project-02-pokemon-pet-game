@@ -1,7 +1,12 @@
 package main;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import main.shop;
+
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class playerUI extends JPanel {
@@ -9,10 +14,28 @@ public class playerUI extends JPanel {
     private int hunger = 100;
     private int happiness = 100;
 
+    private JButton shopButton;
+
     public playerUI() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         this.setPreferredSize(screenSize);
         this.setOpaque(false);
+        this.setLayout(null);
+
+        // Initialize shop button and open shop window on click
+        shopButton = new JButton("Shop");
+        shopButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("My anme Jeff");
+                shop shopWindow = new shop();
+                shopWindow.setVisible(true);
+            }
+        });
+
+        shopButton.setSize(200, 80);
+        shopButton.setLocation(50, 50);
+        this.add(shopButton);
+
     }
 
     public void updateHealth(int health) {
