@@ -1,14 +1,9 @@
 package main;
 
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import java.awt.Image;
+import javax.swing.*;
 
 public class main {
-
     public static void main(String[] args) {
-
         // Set up JFrame object
         JFrame window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

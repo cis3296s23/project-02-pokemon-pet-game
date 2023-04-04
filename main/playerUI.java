@@ -1,29 +1,13 @@
 package main;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Toolkit;
+import java.awt.*;
 
 import javax.swing.JPanel;
 
 public class playerUI extends JPanel {
-
     private int health = 100;
     private int hunger = 100;
     private int happiness = 100;
-
-    private final int statuBarWidth = 200;
-    private final int statuBarHeight = 20;
-
-    private int healthBarX = 50;
-    private int healthBarY = 310;
-    private int hungerBarX = 50;
-    private int hungerBarY = 340;
-    private int happinessBarX = 50;
-    private int happinessBarY = 370;
 
     public playerUI() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -48,11 +32,16 @@ public class playerUI extends JPanel {
 
     @Override
     public void paintComponent(Graphics g) {
+        int statuBarWidth = 200;
+        int statuBarHeight = 20;
 
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
 
         // Draw health bar
+        int healthBarX = 50;
+        int healthBarY = 310;
+
         g2.setColor(Color.RED);
         g2.fillRect(healthBarX, healthBarY, statuBarWidth, statuBarHeight);
         g2.setColor(Color.BLACK);
@@ -65,6 +54,9 @@ public class playerUI extends JPanel {
         g2.drawString(healthLabel, labelX, labelY);
 
         // Draw Hunger Bar
+        int hungerBarX = 50;
+        int hungerBarY = 340;
+
         g2.setColor(Color.GRAY);
         g2.fillRect(hungerBarX, hungerBarY, statuBarWidth, statuBarHeight);
         g2.setColor(Color.BLACK);
@@ -77,6 +69,9 @@ public class playerUI extends JPanel {
         g2.drawString(hungerLabel, hungerlabelX, hungerlabelY);
 
         // Draw Happiness Bar
+        int happinessBarX = 50;
+        int happinessBarY = 370;
+
         g2.setColor(Color.PINK);
         g2.fillRect(happinessBarX, happinessBarY, statuBarWidth, statuBarHeight);
         g2.setColor(Color.BLACK);
@@ -88,5 +83,4 @@ public class playerUI extends JPanel {
         int happinesslabelY = happinessBarY + (statuBarHeight - happinesslabelHeight) / 2 + hungerfm.getAscent();
         g2.drawString(happinessLabel, happinesslabelX, happinesslabelY);
     }
-
 }

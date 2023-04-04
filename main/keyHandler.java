@@ -1,7 +1,6 @@
 package main;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 
 public class keyHandler implements KeyListener {
 
