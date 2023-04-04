@@ -1,120 +1,127 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
+
 package main;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
-
+import java.awt.image.ImageObserver;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.plaf.DimensionUIResource;
 
 public class gamePanel extends JPanel implements Runnable {
-
-    // Gamepanel/window configuration
     final int orignalTileSize = 16;
     final int scale = 4;
-
-    final int tileSize = orignalTileSize * scale; // 64 x 64 per tile
-    // 16:9 Width to height
+    final int tileSize = 64;
     final int maxScreenCol = 16;
     final int maxScreenRow = 9;
-    // 1024 x 576
-    final int screenWidth = tileSize * maxScreenCol;
-    final int screenHeight = tileSize * maxScreenRow;
-
+    final int screenWidth = 1024;
+    final int screenHeight = 576;
     keyHandler kh = new keyHandler();
     Color sky = new Color(28, 235, 235);
+    Thread gameThread;
+    int FPS = 60;
+    int petX = 512;
+    int petY = 360;
+    int petSpeed = 10;
+    int barWidth = 200;
+    int barHeight = 30;
+    int barSpacing = 10;
+    int barX = 20;
 
     public gamePanel() {
-
-        this.setPreferredSize(new DimensionUIResource(screenWidth, screenHeight));
-        this.setBackground(sky);
-        this.setDoubleBuffered(true); // May improve performance
-        this.addKeyListener(kh);
+        this.setPreferredSize(new DimensionUIResource(1024, 576));
+        this.setBackground(this.sky);
+        this.setDoubleBuffered(true);
+        this.addKeyListener(this.kh);
         this.setFocusable(true);
     }
 
-    // Game mechanics
-    Thread gameThread;
-
-    int FPS = 60;
-
-    int petX = 512;
-    int petY = 400;
-    int petSpeed = 10;
-
     public void startGameThread() {
-
-        gameThread = new Thread(this);
-        gameThread.start();
+        this.gameThread = new Thread(this);
+        this.gameThread.start();
     }
 
-    @Override
     public void run() {
-        // Set up game loop to slow game down
-        // Set our time step to run in 60 FPS, game should update every .016 seconds
-        // instead of every nanosecond
-        final double TIME_STEP = 1.0 / FPS;
-        double accumulatedTime = 0;
+        double TIME_STEP = 1.0 / (double)this.FPS;
+        double accumulatedTime = 0.0;
         long currentTime = System.nanoTime();
         long lastTime = System.nanoTime();
 
-        // Game loop
-        // Every time we get to our time step update the game and reset accumulated time
-        // vairable, ensure game runs smoothly regardless of system
-        while (gameThread != null) {
-            // Calculate elapsed time since last update
+        while(this.gameThread != null) {
             currentTime = System.nanoTime();
-            double elapsedTime = (currentTime - lastTime) / 1000000000.0;
+            double elapsedTime = (double)(currentTime - lastTime) / 1.0E9;
             lastTime = currentTime;
-            accumulatedTime += elapsedTime;
 
-            // Update game logic and reset accumulatedTime
-            while (accumulatedTime >= TIME_STEP) {
-                update(TIME_STEP);
-                accumulatedTime -= TIME_STEP;
+            for(accumulatedTime += elapsedTime; accumulatedTime >= TIME_STEP; accumulatedTime -= TIME_STEP) {
+                this.update(TIME_STEP);
             }
 
-            repaint();
+            this.repaint();
         }
+
     }
 
     public void update(double timeStep) {
+        if (this.kh.leftPressed) {
+            this.petX -= this.petSpeed;
+        }
 
-        // Move to the left
-        if (kh.leftPressed == true) {
-            petX = petX - petSpeed;
+        if (this.kh.rightPressed) {
+            this.petX += this.petSpeed;
         }
-        // Move to the right
-        if (kh.rightPressed == true) {
-            petX = petX + petSpeed;
+
+        if (this.kh.jumpPressed) {
         }
-        // Jump
-        if (kh.jumpPressed == true) {
-            // Add jump functionality
+
+        if (this.kh.speakPressed) {
         }
-        // Make Noise
-        if (kh.speakPressed == true) {
-            // make noise
-        }
+
     }
 
     public void paintComponent(Graphics g) {
-
         super.paintComponent(g);
-        Graphics2D g2 = (Graphics2D) g;
-
-        // Draw Grass
+        Graphics2D g2 = (Graphics2D)g;
+        g2.setColor(this.sky);
+        g2.fillRect(0, 0, this.getWidth(), this.getHeight());
         g2.setColor(new Color(16, 199, 59));
         g2.fillRect(0, 400, 1024, 300);
-
-        // Draw eevee
+        int barWidth = 200;
+        int barHeight = 25;
+        int barX = 10;
+        int borderRadius = 15;
+        int happinessBarY = 350;
+        g2.setColor(Color.WHITE);
+        g2.fillRoundRect(barX, happinessBarY, barWidth, barHeight, borderRadius, borderRadius);
+        g2.setColor(Color.CYAN);
+        int happinessBarWidth = (int)((double)barWidth * 0.6);
+        g2.fillRoundRect(barX, happinessBarY, happinessBarWidth, barHeight, borderRadius, borderRadius);
+        g2.setColor(Color.BLACK);
+        g2.drawString("Happiness", barX + 10, happinessBarY + 20);
+        int hungerBarY = 380;
+        g2.setColor(Color.WHITE);
+        g2.fillRoundRect(barX, hungerBarY, barWidth, barHeight, borderRadius, borderRadius);
+        g2.setColor(Color.ORANGE);
+        int hungerBarWidth = (int)((double)barWidth * 0.4);
+        g2.fillRoundRect(barX, hungerBarY, hungerBarWidth, barHeight, borderRadius, borderRadius);
+        g2.setColor(Color.BLACK);
+        g2.drawString("Hunger", barX + 10, hungerBarY + 20);
+        int healthBar = 410;
+        g2.setColor(Color.WHITE);
+        g2.fillRoundRect(barX, healthBar, barWidth, barHeight, borderRadius, borderRadius);
+        g2.setColor(Color.RED);
+        int healthBarWidth = (int)((double)barWidth * 0.8);
+        g2.fillRoundRect(barX, healthBar, healthBarWidth, barHeight, borderRadius, borderRadius);
+        g2.setColor(Color.BLACK);
+        g2.drawString("Health", barX + 10, healthBar + 20);
         ImageIcon ii = new ImageIcon("main/windowIcon.png");
         Image eevee = ii.getImage();
-        g2.drawImage(eevee, petX, petY, tileSize, tileSize, null);
-
+        g2.drawImage(eevee, this.petX, this.petY, 64, 64, (ImageObserver)null);
         g2.dispose();
     }
-
 }
