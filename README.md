@@ -1,5 +1,5 @@
 # Pokemon Pet Game
-A virtual pet game based off on the Poemon franchise.  The game allows you to choose for a pet pokemon and raise it.  You will be tasked with caring for, playing with, and keeping your virtual Pokemon pet healthy and alive.
+A virtual pet game based off on the Pokemon franchise.  The game allows you to choose for a pet pokemon and raise it.  You will be tasked with caring for, playing with, and keeping your virtual Pokemon pet healthy and alive.
 
 ![image](https://user-images.githubusercontent.com/72032695/227060129-f106fff4-6c99-4cd3-9419-e91013796136.png)
 
