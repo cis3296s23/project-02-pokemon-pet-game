@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 import main.shop;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -20,22 +21,20 @@ public class playerUI extends JPanel {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         this.setPreferredSize(screenSize);
         this.setOpaque(false);
-        this.setLayout(null);
+        this.setLayout(new BorderLayout());
 
         // Initialize shop button and open shop window on click
         shopButton = new JButton("Shop");
+        shopButton.setPreferredSize(new Dimension(10, 50));
         shopButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("My anme Jeff");
+                System.out.println("My name Jeff");
                 shop shopWindow = new shop();
                 shopWindow.setVisible(true);
             }
         });
 
-        shopButton.setSize(200, 80);
-        shopButton.setLocation(50, 50);
-        this.add(shopButton);
-
+        this.add(shopButton, BorderLayout.NORTH);
     }
 
     public void updateHealth(int health) {
