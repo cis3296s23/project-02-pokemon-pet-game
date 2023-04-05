@@ -1,6 +1,8 @@
 package main;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -25,6 +27,15 @@ public class shop extends JFrame {
         // Food items
         JPanel foodItems = new JPanel();
         foodItems.setBackground(new Color(74, 208, 27));
+        foodItems.setLayout(new FlowLayout());
+
+        JLabel foodHeader = new JLabel("Food");
+        foodItems.add(foodHeader);
+
+        // Add empty JLabel to sapce food header
+        JLabel emptyLabel = new JLabel();
+        emptyLabel.setPreferredSize(new Dimension(50, 1));
+        foodItems.add(emptyLabel);
 
         JButton buyCookie = new JButton("Buy Cookie");
         JButton buyApple = new JButton("Buy Apple");
