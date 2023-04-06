@@ -5,6 +5,11 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.plaf.DimensionUIResource;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
+import javax.sound.sampled.*;
+
 public class gamePanel extends JPanel implements Runnable {
     public Thread gameThread;
 
@@ -59,14 +64,19 @@ public class gamePanel extends JPanel implements Runnable {
 
             // Update game logic and reset accumulatedTime
             while (accumulatedTime >= TIME_STEP) {
-                update(TIME_STEP);
+                try {
+                    update(TIME_STEP);
+                } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
                 accumulatedTime -= TIME_STEP;
             }
             repaint();
         }
     }
 
-    public void update(double timeStep) {
+    public void update(double timeStep) throws UnsupportedAudioFileException, IOException, LineUnavailableException{
         int gravity = 15;
         int jumpHeight = 10;
 
@@ -84,6 +94,11 @@ public class gamePanel extends JPanel implements Runnable {
             isJumping = true;
             petY -= jumpHeight;
             jumpSpeed = -10;
+            File file = new File("main/jump.wav");
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioStream);      
+            clip.start();
         }
         // If jumping fall back down
         if (isJumping) {
@@ -97,7 +112,11 @@ public class gamePanel extends JPanel implements Runnable {
         }
         // Make Noise
         if (kh.speakPressed == true) {
-            // make noise
+            File file = new File("main/eevee.wav");
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioStream);      
+            clip.start();
         }
 
         if (petX > 1024) {
