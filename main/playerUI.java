@@ -61,12 +61,11 @@ public class playerUI extends JPanel {
         g2.fillRect(hungerBarX, hungerBarY, statuBarWidth, statuBarHeight);
         g2.setColor(Color.BLACK);
         String hungerLabel = "Hunger: " + hunger;
-        FontMetrics hungerfm = g2.getFontMetrics();
-        int hungerlabelWidth = hungerfm.stringWidth(hungerLabel);
-        int hungerlabelHeight = hungerfm.getHeight();
-        int hungerlabelX = hungerBarX + (statuBarWidth - hungerlabelWidth) / 2;
-        int hungerlabelY = hungerBarY + (statuBarHeight - hungerlabelHeight) / 2 + hungerfm.getAscent();
-        g2.drawString(hungerLabel, hungerlabelX, hungerlabelY);
+        labelWidth = fm.stringWidth(hungerLabel);
+        labelHeight = fm.getHeight();
+        labelX = hungerBarX + (statuBarWidth - labelWidth) / 2;
+        labelY = hungerBarY + (statuBarHeight - labelHeight) / 2 + fm.getAscent();
+        g2.drawString(hungerLabel, labelX, labelY);
 
         // Draw Happiness Bar
         int happinessBarX = 50;
@@ -76,11 +75,26 @@ public class playerUI extends JPanel {
         g2.fillRect(happinessBarX, happinessBarY, statuBarWidth, statuBarHeight);
         g2.setColor(Color.BLACK);
         String happinessLabel = "Happiness: " + happiness;
-        FontMetrics happinessfm = g2.getFontMetrics();
-        int happinesslabelWidth = happinessfm.stringWidth(happinessLabel);
-        int happinesslabelHeight = happinessfm.getHeight();
-        int happinesslabelX = happinessBarX + (statuBarWidth - happinesslabelWidth) / 2;
-        int happinesslabelY = happinessBarY + (statuBarHeight - happinesslabelHeight) / 2 + hungerfm.getAscent();
-        g2.drawString(happinessLabel, happinesslabelX, happinesslabelY);
+        labelWidth = fm.stringWidth(happinessLabel);
+        labelHeight = fm.getHeight();
+        labelX = happinessBarX + (statuBarWidth - labelWidth) / 2;
+        labelY = happinessBarY + (statuBarHeight - labelHeight) / 2 + fm.getAscent();
+        g2.drawString(happinessLabel, labelX, labelY);
+
+    }
+    public void drawStatusBar(Graphics2D g2, int x, int y, int width, int height, double percentage, Color barColor) {
+        int statusBarWidth = (int) (width * percentage);
+
+        // Draw background
+        g2.setColor(Color.GRAY);
+        g2.fillRect(x, y, width, height);
+
+        // Draw status bar
+        g2.setColor(barColor);
+        g2.fillRect(x, y, statusBarWidth, height);
+
+        // Draw border
+        g2.setColor(Color.BLACK);
+        g2.drawRect(x, y, width, height);
     }
 }
