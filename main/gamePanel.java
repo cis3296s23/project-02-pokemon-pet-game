@@ -157,7 +157,7 @@ public class gamePanel extends JPanel implements Runnable {
 
         //Draw cloud images
         drawImageCloud(g2, cloud1, 120, 70, 200, 100);
-        drawImageCloud(g2, cloud2, 400, 120, 200, 100);
+        drawImageCloud(g2, cloud2, 450, 120, 200, 100);
         drawImageCloud(g2, cloud3, 750, 70, 190, 110);
         // Draw eevee
         ImageIcon ii = new ImageIcon("main/windowIcon.png");
