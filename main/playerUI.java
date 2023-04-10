@@ -10,6 +10,9 @@ import main.shop;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.ImageIcon;
+import java.net.URL;
+
 
 public class playerUI extends JPanel {
     private int health = 100;
@@ -25,8 +28,22 @@ public class playerUI extends JPanel {
         this.setLayout(new BorderLayout());
 
         // Initialize shop button and open shop window on click
-        shopButton = new JButton("Shop");
-        shopButton.setPreferredSize(new Dimension(10, 50));
+        shopButton = new JButton();
+        shopButton.setPreferredSize(new Dimension(50, 50));
+        shopButton.setBorderPainted(false);
+        shopButton.setContentAreaFilled(false);
+        shopButton.setFocusPainted(false);
+        shopButton.setOpaque(false);
+
+        // Set the shop icon
+        URL location = getClass().getResource("/images/shop.png");
+        ImageIcon shopIcon = new ImageIcon(location);
+        Image scaledImage = shopIcon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+        shopIcon = new ImageIcon(scaledImage);
+        shopButton.setIcon(shopIcon);
+
+        this.add(shopButton, BorderLayout.NORTH);
+
         shopButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("My name Jeff");
@@ -34,8 +51,6 @@ public class playerUI extends JPanel {
                 shopWindow.setVisible(true);
             }
         });
-
-        this.add(shopButton, BorderLayout.NORTH);
     }
 
 
