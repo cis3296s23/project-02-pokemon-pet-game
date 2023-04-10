@@ -1,3 +1,9 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
+
+
 package main;
 
 import java.awt.*;
@@ -7,7 +13,6 @@ import javax.swing.plaf.DimensionUIResource;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Scanner;
 import javax.sound.sampled.*;
 
 public class gamePanel extends JPanel implements Runnable {
@@ -20,9 +25,15 @@ public class gamePanel extends JPanel implements Runnable {
     public double jumpSpeed = -10;
     public boolean isJumping = false;
 
+    private Image cloud1;
+    private Image cloud2;
+    private Image cloud3;
     public keyHandler kh = new keyHandler();
     public playerUI UI = new playerUI();
 
+    public void drawImageCloud(Graphics2D g2, Image cloud, int x, int y, int width, int height) {
+        g2.drawImage(cloud, x, y, width, height, null);
+    }
     public gamePanel() {
         this.setPreferredSize(new DimensionUIResource(1024, 576));
 
@@ -32,6 +43,14 @@ public class gamePanel extends JPanel implements Runnable {
         this.addKeyListener(kh);
         this.add(UI);
         this.setFocusable(true);
+
+        // Load Cloud images
+        ImageIcon cloudIcon1 = new ImageIcon("images/cloud_01.png");
+        ImageIcon cloudIcon2 = new ImageIcon("images/cloud_02.png");
+        ImageIcon cloudIcon3 = new ImageIcon("images/cloud_03.png");
+        cloud1 = cloudIcon1.getImage();
+        cloud2 = cloudIcon2.getImage();
+        cloud3 = cloudIcon3.getImage();
     }
 
     public void startGameThread() {
@@ -97,7 +116,7 @@ public class gamePanel extends JPanel implements Runnable {
             File file = new File("main/jump.wav");
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
             Clip clip = AudioSystem.getClip();
-            clip.open(audioStream);      
+            clip.open(audioStream);
             clip.start();
         }
         // If jumping fall back down
@@ -115,7 +134,7 @@ public class gamePanel extends JPanel implements Runnable {
             File file = new File("main/eevee.wav");
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
             Clip clip = AudioSystem.getClip();
-            clip.open(audioStream);      
+            clip.open(audioStream);
             clip.start();
         }
 
@@ -136,6 +155,10 @@ public class gamePanel extends JPanel implements Runnable {
         g2.setColor(new Color(16, 199, 59));
         g2.fillRect(0, 400, 1024, 300);
 
+        //Draw cloud images
+        drawImageCloud(g2, cloud1, 120, 70, 200, 100);
+        drawImageCloud(g2, cloud2, 450, 120, 200, 100);
+        drawImageCloud(g2, cloud3, 750, 70, 190, 110);
         // Draw eevee
         ImageIcon ii = new ImageIcon("main/windowIcon.png");
         Image eevee = ii.getImage();
