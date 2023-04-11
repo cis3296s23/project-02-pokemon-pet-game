@@ -15,6 +15,8 @@ public class playerUI extends JPanel {
     private gamePanel gamePanel;
     private JButton shopButton;
 
+    private JLabel currencyLabel;
+
     public playerUI(gamePanel gamePanel) {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         this.setPreferredSize(screenSize);
@@ -46,6 +48,11 @@ public class playerUI extends JPanel {
                 shopWindow.setVisible(true);
             }
         });
+    }
+
+    public void updateCurrencyLabel() {
+        currencyLabel.setText("Money: " + currency.balance);
+        repaint();
     }
 
     public void updateHealth(int health) {

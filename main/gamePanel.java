@@ -30,6 +30,8 @@ public class gamePanel extends JPanel implements Runnable {
     public keyHandler kh = new keyHandler();
     public playerUI UI = new playerUI(this);
 
+    private JLabel currencyLabel;
+
     public void drawImageCloud(Graphics2D g2, Image cloud, int x, int y, int width, int height) {
         g2.drawImage(cloud, x, y, width, height, null);
     }
@@ -163,6 +165,11 @@ public class gamePanel extends JPanel implements Runnable {
         ImageIcon ii = new ImageIcon("main/windowIcon.png");
         Image eevee = ii.getImage();
         g2.drawImage(eevee, petX, petY, 64 * 4, 64 * 4, null);
+
+        // Draw Currency label
+        g2.setColor(Color.BLACK);
+        g2.setFont(new Font("Arial", Font.BOLD, 26));
+        g2.drawString("Money: " + currency.balance, 456, 560);
 
         // Draw UI
         UI.paint(g2);
