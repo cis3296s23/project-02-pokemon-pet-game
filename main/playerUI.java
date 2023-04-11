@@ -2,16 +2,10 @@
 package main;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
-import main.shop;
-
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.ImageIcon;
-import java.net.URL;
+import javax.swing.*;
+import java.net.*;
 
 
 public class playerUI extends JPanel {
@@ -36,11 +30,11 @@ public class playerUI extends JPanel {
         shopButton.setOpaque(false);
 
         // Set the shop icon
-        URL location = getClass().getResource("/images/shop.png");
-        ImageIcon shopIcon = new ImageIcon(location);
-        Image scaledImage = shopIcon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-        shopIcon = new ImageIcon(scaledImage);
-        shopButton.setIcon(shopIcon);
+        //URL location = getClass().getResource("/images/shop.png");
+        //ImageIcon shopIcon = new ImageIcon(location);
+        //Image scaledImage = shopIcon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+        //shopIcon = new ImageIcon(scaledImage);
+        //shopButton.setIcon(shopIcon);
 
         this.add(shopButton, BorderLayout.NORTH);
 
