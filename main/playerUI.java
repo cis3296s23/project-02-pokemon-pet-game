@@ -7,19 +7,20 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.net.*;
 
-
 public class playerUI extends JPanel {
     private int health = 100;
     private int hunger = 100;
     private int happiness = 100;
 
+    private gamePanel gamePanel;
     private JButton shopButton;
 
-    public playerUI() {
+    public playerUI(gamePanel gamePanel) {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         this.setPreferredSize(screenSize);
         this.setOpaque(false);
         this.setLayout(new BorderLayout());
+        this.gamePanel = gamePanel;
 
         // Initialize shop button and open shop window on click
         shopButton = new JButton();
@@ -30,23 +31,22 @@ public class playerUI extends JPanel {
         shopButton.setOpaque(false);
 
         // Set the shop icon
-        //URL location = getClass().getResource("/images/shop.png");
-        //ImageIcon shopIcon = new ImageIcon(location);
-        //Image scaledImage = shopIcon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-        //shopIcon = new ImageIcon(scaledImage);
-        //shopButton.setIcon(shopIcon);
+        // URL location = getClass().getResource("/images/shop.png");
+        // ImageIcon shopIcon = new ImageIcon(location);
+        // Image scaledImage = shopIcon.getImage().getScaledInstance(50, 50,
+        // Image.SCALE_SMOOTH);
+        // shopIcon = new ImageIcon(scaledImage);
+        // shopButton.setIcon(shopIcon);
 
         this.add(shopButton, BorderLayout.NORTH);
 
         shopButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("My name Jeff");
-                shop shopWindow = new shop();
+                shop shopWindow = new shop(gamePanel);
                 shopWindow.setVisible(true);
             }
         });
     }
-
 
     public void updateHealth(int health) {
         this.health = health;
@@ -75,7 +75,8 @@ public class playerUI extends JPanel {
         // Draw health bar
         int healthBarX = 20;
         int healthBarY = 310;
-        GradientPaint healthGradient = new GradientPaint(0, healthBarY, Color.RED, 0, healthBarY + statusBarHeight, Color.RED);
+        GradientPaint healthGradient = new GradientPaint(0, healthBarY, Color.RED, 0, healthBarY + statusBarHeight,
+                Color.RED);
 
         g2.setPaint(healthGradient);
         g2.fillRoundRect(healthBarX, healthBarY, statusBarWidth, statusBarHeight, cornerRadius, cornerRadius);
@@ -85,7 +86,8 @@ public class playerUI extends JPanel {
         // Draw hunger bar
         int hungerBarX = 20;
         int hungerBarY = 340;
-        GradientPaint hungerGradient = new GradientPaint(0, hungerBarY, Color.ORANGE, 0, hungerBarY + statusBarHeight, Color.GRAY);
+        GradientPaint hungerGradient = new GradientPaint(0, hungerBarY, Color.ORANGE, 0, hungerBarY + statusBarHeight,
+                Color.GRAY);
 
         g2.setPaint(hungerGradient);
         g2.fillRoundRect(hungerBarX, hungerBarY, statusBarWidth, statusBarHeight, cornerRadius, cornerRadius);
@@ -95,7 +97,8 @@ public class playerUI extends JPanel {
         // Draw happiness bar
         int happinessBarX = 20;
         int happinessBarY = 370;
-        GradientPaint happinessGradient = new GradientPaint(0, happinessBarY, Color.CYAN, 0, happinessBarY + statusBarHeight, Color.GRAY);
+        GradientPaint happinessGradient = new GradientPaint(0, happinessBarY, Color.CYAN, 0,
+                happinessBarY + statusBarHeight, Color.GRAY);
 
         g2.setPaint(happinessGradient);
         g2.fillRoundRect(happinessBarX, happinessBarY, statusBarWidth, statusBarHeight, cornerRadius, cornerRadius);
@@ -129,4 +132,3 @@ public class playerUI extends JPanel {
     }
 
 }
-

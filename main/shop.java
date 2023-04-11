@@ -3,6 +3,8 @@ package main;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -12,11 +14,22 @@ import javax.swing.JPanel;
 
 public class shop extends JFrame {
 
-    public shop() {
+    private gamePanel gamePanel;
+
+    public shop(gamePanel gamePanel) {
+        this.gamePanel = gamePanel;
         this.setTitle("Shop");
         this.setSize(400, 400);
         this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        // set the focus back to the gamePanel
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                gamePanel.requestFocusInWindow();
+            }
+        });
 
         // Shop will be composed of three Jpanels inside main panel
         // Main panel uses box layout to organize items in cateogries
