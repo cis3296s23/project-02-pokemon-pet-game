@@ -3,7 +3,6 @@
 // (powered by FernFlower decompiler)
 //
 
-
 package main;
 
 import java.awt.*;
@@ -29,11 +28,14 @@ public class gamePanel extends JPanel implements Runnable {
     private Image cloud2;
     private Image cloud3;
     public keyHandler kh = new keyHandler();
-    public playerUI UI = new playerUI();
+    public playerUI UI = new playerUI(this);
+
+    private JLabel currencyLabel;
 
     public void drawImageCloud(Graphics2D g2, Image cloud, int x, int y, int width, int height) {
         g2.drawImage(cloud, x, y, width, height, null);
     }
+
     public gamePanel() {
         this.setPreferredSize(new DimensionUIResource(1024, 576));
 
@@ -95,7 +97,7 @@ public class gamePanel extends JPanel implements Runnable {
         }
     }
 
-    public void update(double timeStep) throws UnsupportedAudioFileException, IOException, LineUnavailableException{
+    public void update(double timeStep) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
         int gravity = 15;
         int jumpHeight = 10;
 
@@ -155,7 +157,7 @@ public class gamePanel extends JPanel implements Runnable {
         g2.setColor(new Color(16, 199, 59));
         g2.fillRect(0, 400, 1024, 300);
 
-        //Draw cloud images
+        // Draw cloud images
         drawImageCloud(g2, cloud1, 120, 70, 200, 100);
         drawImageCloud(g2, cloud2, 450, 120, 200, 100);
         drawImageCloud(g2, cloud3, 750, 70, 190, 110);
@@ -163,6 +165,11 @@ public class gamePanel extends JPanel implements Runnable {
         ImageIcon ii = new ImageIcon("main/windowIcon.png");
         Image eevee = ii.getImage();
         g2.drawImage(eevee, petX, petY, 64 * 4, 64 * 4, null);
+
+        // Draw Currency label
+        g2.setColor(Color.BLACK);
+        g2.setFont(new Font("Arial", Font.BOLD, 26));
+        g2.drawString("Money: " + currency.balance, 456, 560);
 
         // Draw UI
         UI.paint(g2);
