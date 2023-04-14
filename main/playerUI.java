@@ -5,7 +5,6 @@ import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
-import java.net.*;
 
 public class playerUI extends JPanel {
     private int health = 100;
@@ -14,6 +13,7 @@ public class playerUI extends JPanel {
 
     private gamePanel gamePanel;
     private JButton shopButton;
+    private JButton miniGame;
 
     private JLabel currencyLabel;
 
@@ -24,28 +24,47 @@ public class playerUI extends JPanel {
         this.setLayout(new BorderLayout());
         this.gamePanel = gamePanel;
 
-        // Initialize shop button and open shop window on click
-        shopButton = new JButton();
-        shopButton.setPreferredSize(new Dimension(50, 50));
-        shopButton.setBorderPainted(false);
-        shopButton.setContentAreaFilled(false);
-        shopButton.setFocusPainted(false);
-        shopButton.setOpaque(false);
+        // // Initialize shop button and open shop window on click
+        // shopButton = new JButton();
+        // shopButton.setPreferredSize(new Dimension(50, 50));
+        // shopButton.setBorderPainted(false);
+        // shopButton.setContentAreaFilled(false);
+        // shopButton.setFocusPainted(false);
+        // shopButton.setOpaque(true);
 
+        // /* 
         // Set the shop icon
         // URL location = getClass().getResource("/images/shop.png");
         // ImageIcon shopIcon = new ImageIcon(location);
         // Image scaledImage = shopIcon.getImage().getScaledInstance(50, 50,
         // Image.SCALE_SMOOTH);
         // shopIcon = new ImageIcon(scaledImage);
-        // shopButton.setIcon(shopIcon);
+        // shopButton.setIcon(shopIcon); 
+        // */ 
 
-        this.add(shopButton, BorderLayout.NORTH);
+        // this.add(shopButton, BorderLayout.NORTH);
 
-        shopButton.addActionListener(new ActionListener() {
+        // shopButton.addActionListener(new ActionListener() {
+        //     public void actionPerformed(ActionEvent e) {
+        //         shop shopWindow = new shop(gamePanel);
+        //         shopWindow.setVisible(true);
+        //     }
+        // });
+
+        // Initialize minigame button and open shop window on click
+        miniGame = new JButton();
+        miniGame.setPreferredSize(new Dimension(50, 50));
+        miniGame.setBorderPainted(true);
+        miniGame.setContentAreaFilled(true);
+        miniGame.setFocusPainted(true);
+        miniGame.setOpaque(true);
+
+        this.add(miniGame, BorderLayout.NORTH);
+
+        miniGame.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                shop shopWindow = new shop(gamePanel);
-                shopWindow.setVisible(true);
+                new minigame();
+                System.out.println("Jeff");
             }
         });
     }

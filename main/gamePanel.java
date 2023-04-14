@@ -88,7 +88,6 @@ public class gamePanel extends JPanel implements Runnable {
                 try {
                     update(TIME_STEP);
                 } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
                 accumulatedTime -= TIME_STEP;
