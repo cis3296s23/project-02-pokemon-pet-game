@@ -15,6 +15,10 @@ import java.io.File;
 import java.io.IOException;
 import javax.sound.sampled.*;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+
 public class gamePanel extends JPanel implements Runnable {
     public Thread gameThread;
 
@@ -52,6 +56,7 @@ public class gamePanel extends JPanel implements Runnable {
         cloud2 = cloudIcon2.getImage();
         cloud3 = cloudIcon3.getImage();
     }
+
 
     public void startGameThread() {
         this.requestFocus();
@@ -156,9 +161,10 @@ public class gamePanel extends JPanel implements Runnable {
         g2.fillRect(0, 400, 1024, 300);
 
         //Draw cloud images
-        drawImageCloud(g2, cloud1, 120, 70, 200, 100);
-        drawImageCloud(g2, cloud2, 450, 120, 200, 100);
-        drawImageCloud(g2, cloud3, 750, 70, 190, 110);
+        drawImageCloud(g2, cloud3, 20, 50, 190, 110);
+        drawImageCloud(g2, cloud1, 250, 100, 200, 100);
+        drawImageCloud(g2, cloud2, 530, 90, 200, 100);
+        drawImageCloud(g2, cloud3, 820, 60, 190, 110);
         // Draw eevee
         ImageIcon ii = new ImageIcon("main/windowIcon.png");
         Image eevee = ii.getImage();
