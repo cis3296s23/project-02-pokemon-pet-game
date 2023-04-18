@@ -47,9 +47,9 @@ public class gamePanel extends JPanel implements Runnable {
         this.setFocusable(true);
 
         // Load Cloud images
-        ImageIcon cloudIcon1 = new ImageIcon("images/cloud_01.png");
-        ImageIcon cloudIcon2 = new ImageIcon("images/cloud_02.png");
-        ImageIcon cloudIcon3 = new ImageIcon("images/cloud_03.png");
+        ImageIcon cloudIcon1 = new ImageIcon("res/cloud_01.png");
+        ImageIcon cloudIcon2 = new ImageIcon("res/cloud_02.png");
+        ImageIcon cloudIcon3 = new ImageIcon("res/cloud_03.png");
         cloud1 = cloudIcon1.getImage();
         cloud2 = cloudIcon2.getImage();
         cloud3 = cloudIcon3.getImage();
@@ -115,7 +115,7 @@ public class gamePanel extends JPanel implements Runnable {
             isJumping = true;
             petY -= jumpHeight;
             jumpSpeed = -10;
-            File file = new File("main/jump.wav");
+            File file = new File("res/jump.wav");
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
             Clip clip = AudioSystem.getClip();
             clip.open(audioStream);
@@ -133,7 +133,7 @@ public class gamePanel extends JPanel implements Runnable {
         }
         // Make Noise
         if (kh.speakPressed == true) {
-            File file = new File("main/eevee.wav");
+            File file = new File("res/eevee.wav");
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
             Clip clip = AudioSystem.getClip();
             clip.open(audioStream);
@@ -162,7 +162,7 @@ public class gamePanel extends JPanel implements Runnable {
         drawImageCloud(g2, cloud2, 450, 120, 200, 100);
         drawImageCloud(g2, cloud3, 750, 70, 190, 110);
         // Draw eevee
-        ImageIcon ii = new ImageIcon("main/windowIcon.png");
+        ImageIcon ii = new ImageIcon("res/windowIcon.png");
         Image eevee = ii.getImage();
         g2.drawImage(eevee, petX, petY, 64 * 4, 64 * 4, null);
 

@@ -44,7 +44,7 @@ public class main {
         JFrame window = new JFrame();
         window.setDefaultCloseOperation(3);
         window.setResizable(false);
-        ImageIcon windowIcon = new ImageIcon("main/windowIcon.png");
+        ImageIcon windowIcon = new ImageIcon("res/windowIcon.png");
         window.setIconImage(windowIcon.getImage());
         window.setTitle("Pokemon Pet Game");
         window.setLocationRelativeTo((Component)null);
