@@ -34,6 +34,9 @@ public class gamePanel extends JPanel implements Runnable {
     private Image cloud3;
     public keyHandler kh = new keyHandler();
     public playerUI UI = new playerUI();
+    private double hungerDecrementTime = 0;
+    private double happinessDecrementTime = 0;
+    private double healthDecrementTime = 0;
 
     public void drawImageCloud(Graphics2D g2, Image cloud, int x, int y, int width, int height) {
         g2.drawImage(cloud, x, y, width, height, null);
@@ -148,6 +151,33 @@ public class gamePanel extends JPanel implements Runnable {
         }
         if (petX < -200) {
             petX = 1024;
+        }
+        // Decrease hunger, happiness, and health bars
+        hungerDecrementTime += timeStep;
+        happinessDecrementTime += timeStep;
+        healthDecrementTime += timeStep;
+
+        double hungerInterval = 1.0; // Change this value to adjust the hunger decrement interval
+        double happinessInterval = 1.5; // Change this value to adjust the happiness decrement interval
+        double healthInterval = 1.0; // Change this value to adjust the health decrement interval
+
+        if (hungerDecrementTime >= hungerInterval) {
+            UI.updateHunger(Math.max(UI.hunger - 1, 0));
+            hungerDecrementTime = 0;
+        }
+
+        if (happinessDecrementTime >= happinessInterval) {
+            UI.updateHappiness(Math.max(UI.happiness - 1, 0));
+            happinessDecrementTime = 0;
+        }
+
+        if (healthDecrementTime >= healthInterval) {
+            double healthDecrement = 0.3;
+            if (UI.hunger == 0 || UI.happiness == 0) {
+                healthDecrement = 5; // Adjust this value to change how quickly the health bar decreases when hunger or happiness is 0
+            }
+            UI.updateHealth((int) Math.max(UI.health - healthDecrement, 0));
+            healthDecrementTime = 0;
         }
     }
 

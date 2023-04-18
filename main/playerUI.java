@@ -14,9 +14,9 @@ import java.net.URL;
 
 
 public class playerUI extends JPanel {
-    private int health = 100;
-    private int hunger = 100;
-    private int happiness = 100;
+    int health = 100;
+    int hunger = 100;
+    int happiness = 100;
 
     private JButton shopButton;
 
@@ -27,19 +27,10 @@ public class playerUI extends JPanel {
         this.setLayout(new BorderLayout());
 
         // Initialize shop button and open shop window on click
-        shopButton = new JButton();
-        shopButton.setPreferredSize(new Dimension(50, 50));
-        shopButton.setBorderPainted(false);
-        shopButton.setContentAreaFilled(false);
+        shopButton = new JButton("Shop"); // Set button text to "Shop"
+        shopButton.setPreferredSize(new Dimension(100, 50));
         shopButton.setFocusPainted(false);
         shopButton.setOpaque(false);
-
-        // Set the shop icon
-        URL location = getClass().getResource("/images/shop.png");
-        ImageIcon shopIcon = new ImageIcon(location);
-        Image scaledImage = shopIcon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-        shopIcon = new ImageIcon(scaledImage);
-        shopButton.setIcon(shopIcon);
 
         this.add(shopButton, BorderLayout.NORTH);
 
@@ -83,7 +74,7 @@ public class playerUI extends JPanel {
         GradientPaint healthGradient = new GradientPaint(0, healthBarY, Color.RED, 0, healthBarY + statusBarHeight, Color.RED);
 
         g2.setPaint(healthGradient);
-        g2.fillRoundRect(healthBarX, healthBarY, statusBarWidth, statusBarHeight, cornerRadius, cornerRadius);
+        g2.fillRoundRect(healthBarX, healthBarY, (int) (health * (statusBarWidth / 100.0)), statusBarHeight, cornerRadius, cornerRadius);
         g2.setColor(Color.BLACK);
         g2.drawRoundRect(healthBarX, healthBarY, statusBarWidth, statusBarHeight, cornerRadius, cornerRadius);
 
@@ -93,17 +84,17 @@ public class playerUI extends JPanel {
         GradientPaint hungerGradient = new GradientPaint(0, hungerBarY, Color.ORANGE, 0, hungerBarY + statusBarHeight, Color.GRAY);
 
         g2.setPaint(hungerGradient);
-        g2.fillRoundRect(hungerBarX, hungerBarY, statusBarWidth, statusBarHeight, cornerRadius, cornerRadius);
+        g2.fillRoundRect(hungerBarX, hungerBarY, (int) (hunger * (statusBarWidth / 100.0)), statusBarHeight, cornerRadius, cornerRadius);
         g2.setColor(Color.BLACK);
         g2.drawRoundRect(hungerBarX, hungerBarY, statusBarWidth, statusBarHeight, cornerRadius, cornerRadius);
 
         // Draw happiness bar
         int happinessBarX = 20;
         int happinessBarY = 370;
-        GradientPaint happinessGradient = new GradientPaint(0, happinessBarY, Color.CYAN, 0, happinessBarY + statusBarHeight, Color.GRAY);
+        GradientPaint happinessGradient = new GradientPaint(0, happinessBarY, Color.GREEN, 0, happinessBarY + statusBarHeight, Color.GRAY);
 
         g2.setPaint(happinessGradient);
-        g2.fillRoundRect(happinessBarX, happinessBarY, statusBarWidth, statusBarHeight, cornerRadius, cornerRadius);
+        g2.fillRoundRect(happinessBarX, happinessBarY, (int) (happiness * (statusBarWidth / 100.0)), statusBarHeight, cornerRadius, cornerRadius);
         g2.setColor(Color.BLACK);
         g2.drawRoundRect(happinessBarX, happinessBarY, statusBarWidth, statusBarHeight, cornerRadius, cornerRadius);
 

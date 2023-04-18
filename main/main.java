@@ -23,4 +23,3 @@ public class main {
         gamePanel.startGameThread();
     }
 }
-
