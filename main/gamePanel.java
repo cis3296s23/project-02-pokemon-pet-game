@@ -2,8 +2,6 @@
 // Source code recreated from a .class file by IntelliJ IDEA
 // (powered by FernFlower decompiler)
 //
-
-/*
 package main;
 
 import java.awt.*;
@@ -34,13 +32,16 @@ public class gamePanel extends JPanel implements Runnable {
     private Image cloud3;
     public keyHandler kh = new keyHandler();
     public playerUI UI = new playerUI(this);
+    
     private double hungerDecrementTime = 0;
     private double happinessDecrementTime = 0;
     private double healthDecrementTime = 0;
 
+
     public void drawImageCloud(Graphics2D g2, Image cloud, int x, int y, int width, int height) {
         g2.drawImage(cloud, x, y, width, height, null);
     }
+
     public gamePanel() {
         this.setPreferredSize(new DimensionUIResource(1024, 576));
 
@@ -52,9 +53,9 @@ public class gamePanel extends JPanel implements Runnable {
         this.setFocusable(true);
 
         // Load Cloud images
-        ImageIcon cloudIcon1 = new ImageIcon("images/cloud_01.png");
-        ImageIcon cloudIcon2 = new ImageIcon("images/cloud_02.png");
-        ImageIcon cloudIcon3 = new ImageIcon("images/cloud_03.png");
+        ImageIcon cloudIcon1 = new ImageIcon("res/cloud_01.png");
+        ImageIcon cloudIcon2 = new ImageIcon("res/cloud_02.png");
+        ImageIcon cloudIcon3 = new ImageIcon("res/cloud_03.png");
         cloud1 = cloudIcon1.getImage();
         cloud2 = cloudIcon2.getImage();
         cloud3 = cloudIcon3.getImage();
@@ -94,7 +95,6 @@ public class gamePanel extends JPanel implements Runnable {
                 try {
                     update(TIME_STEP);
                 } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
                 accumulatedTime -= TIME_STEP;
@@ -103,7 +103,7 @@ public class gamePanel extends JPanel implements Runnable {
         }
     }
 
-    public void update(double timeStep) throws UnsupportedAudioFileException, IOException, LineUnavailableException{
+    public void update(double timeStep) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
         int gravity = 15;
         int jumpHeight = 10;
 
@@ -121,7 +121,7 @@ public class gamePanel extends JPanel implements Runnable {
             isJumping = true;
             petY -= jumpHeight;
             jumpSpeed = -10;
-            File file = new File("main/jump.wav");
+            File file = new File("res/jump.wav");
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
             Clip clip = AudioSystem.getClip();
             clip.open(audioStream);
@@ -139,7 +139,7 @@ public class gamePanel extends JPanel implements Runnable {
         }
         // Make Noise
         if (kh.speakPressed == true) {
-            File file = new File("main/eevee.wav");
+            File file = new File("res/eevee.wav");
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
             Clip clip = AudioSystem.getClip();
             clip.open(audioStream);
@@ -348,7 +348,7 @@ public class gamePanel extends JPanel implements Runnable {
         drawImageCloud(g2, cloud2, 450, 120, 200, 100);
         drawImageCloud(g2, cloud3, 750, 70, 190, 110);
         // Draw eevee
-        ImageIcon ii = new ImageIcon("main/windowIcon.png");
+        ImageIcon ii = new ImageIcon("res/windowIcon.png");
         Image eevee = ii.getImage();
         g2.drawImage(eevee, petX, petY, 64 * 4, 64 * 4, null);
 

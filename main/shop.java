@@ -23,6 +23,7 @@ import  java.awt.event.WindowEvent;
 public class shop extends JFrame {
 
     private gamePanel gamePanel;
+    
     public shop(gamePanel gamePanel) {
         this.setTitle("Shop");
         this.setSize(600, 600);
@@ -43,6 +44,10 @@ public class shop extends JFrame {
         shopPanel.setBackground(new Color(200, 230, 255));
         shopPanel.setLayout(new GridLayout(3, 1, 10, 10));
         shopPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        // Currency label
+        currencyLabel = new JLabel("Money: " + currency.balance);
+        shopPanel.add(currencyLabel);
 
         // Food items
         JPanel foodItems = createCategoryPanel("Food");

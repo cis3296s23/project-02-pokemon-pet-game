@@ -2,17 +2,9 @@
 package main;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
-import main.shop;
-
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.ImageIcon;
-import java.net.URL;
-
+import javax.swing.*;
 
 public class playerUI extends JPanel {
     int health = 100;
@@ -21,7 +13,10 @@ public class playerUI extends JPanel {
 
     private gamePanel gamePanel;
     private JButton shopButton;
+    private JButton miniGame;
 
+    private JLabel currencyLabel;
+    
     public playerUI(gamePanel gamePanel) {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         this.setPreferredSize(screenSize);
@@ -46,6 +41,10 @@ public class playerUI extends JPanel {
         });
     }
 
+    public void updateCurrencyLabel() {
+        currencyLabel.setText("Money: " + currency.balance);
+        repaint();
+    }
 
     public void updateHealth(int health) {
         this.health = health;
@@ -74,7 +73,8 @@ public class playerUI extends JPanel {
         // Draw health bar
         int healthBarX = 20;
         int healthBarY = 310;
-        GradientPaint healthGradient = new GradientPaint(0, healthBarY, Color.RED, 0, healthBarY + statusBarHeight, Color.RED);
+        GradientPaint healthGradient = new GradientPaint(0, healthBarY, Color.RED, 0, healthBarY + statusBarHeight,
+                Color.RED);
 
         g2.setPaint(healthGradient);
         g2.fillRoundRect(healthBarX, healthBarY, (int) (health * (statusBarWidth / 100.0)), statusBarHeight, cornerRadius, cornerRadius);
@@ -84,7 +84,8 @@ public class playerUI extends JPanel {
         // Draw hunger bar
         int hungerBarX = 20;
         int hungerBarY = 340;
-        GradientPaint hungerGradient = new GradientPaint(0, hungerBarY, Color.ORANGE, 0, hungerBarY + statusBarHeight, Color.GRAY);
+        GradientPaint hungerGradient = new GradientPaint(0, hungerBarY, Color.ORANGE, 0, hungerBarY + statusBarHeight,
+                Color.GRAY);
 
         g2.setPaint(hungerGradient);
         g2.fillRoundRect(hungerBarX, hungerBarY, (int) (hunger * (statusBarWidth / 100.0)), statusBarHeight, cornerRadius, cornerRadius);
@@ -94,7 +95,9 @@ public class playerUI extends JPanel {
         // Draw happiness bar
         int happinessBarX = 20;
         int happinessBarY = 370;
+
         GradientPaint happinessGradient = new GradientPaint(0, happinessBarY, Color.GREEN, 0, happinessBarY + statusBarHeight, Color.GRAY);
+
 
         g2.setPaint(happinessGradient);
         g2.fillRoundRect(happinessBarX, happinessBarY, (int) (happiness * (statusBarWidth / 100.0)), statusBarHeight, cornerRadius, cornerRadius);
@@ -128,7 +131,6 @@ public class playerUI extends JPanel {
     }
 
 }
-*/
 
 package main;
 
@@ -288,3 +290,4 @@ public class playerUI extends JPanel {
         g2.drawString(happinessLabel, labelX, labelY);
     }
 }
+
