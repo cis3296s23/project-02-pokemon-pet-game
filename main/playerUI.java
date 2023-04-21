@@ -1,137 +1,3 @@
-/*
-package main;
-
-import java.awt.*;
-import java.awt.event.*;
-
-import javax.swing.*;
-
-public class playerUI extends JPanel {
-    int health = 100;
-    int hunger = 100;
-    int happiness = 100;
-
-    private gamePanel gamePanel;
-    private JButton shopButton;
-    private JButton miniGame;
-
-    private JLabel currencyLabel;
-    
-    public playerUI(gamePanel gamePanel) {
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setPreferredSize(screenSize);
-        this.setOpaque(false);
-        this.setLayout(new BorderLayout());
-        this.gamePanel = gamePanel;
-
-        // Initialize shop button and open shop window on click
-        shopButton = new JButton("Shop"); // Set button text to "Shop"
-        shopButton.setPreferredSize(new Dimension(100, 50));
-        shopButton.setFocusPainted(false);
-        shopButton.setOpaque(false);
-
-        this.add(shopButton, BorderLayout.NORTH);
-
-        shopButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("My name Jeff");
-                shop shopWindow = new shop(gamePanel);
-                shopWindow.setVisible(true);
-            }
-        });
-    }
-
-    public void updateCurrencyLabel() {
-        currencyLabel.setText("Money: " + currency.balance);
-        repaint();
-    }
-
-    public void updateHealth(int health) {
-        this.health = health;
-        repaint();
-    }
-
-    public void updateHunger(int hunger) {
-        this.hunger = hunger;
-        repaint();
-    }
-
-    public void updateHappiness(int happiness) {
-        this.happiness = happiness;
-        repaint();
-    }
-
-    @Override
-    public void paintComponent(Graphics g) {
-        int statusBarWidth = 200;
-        int statusBarHeight = 20;
-        int cornerRadius = 5;
-
-        super.paintComponent(g);
-        Graphics2D g2 = (Graphics2D) g;
-
-        // Draw health bar
-        int healthBarX = 20;
-        int healthBarY = 310;
-        GradientPaint healthGradient = new GradientPaint(0, healthBarY, Color.RED, 0, healthBarY + statusBarHeight,
-                Color.RED);
-
-        g2.setPaint(healthGradient);
-        g2.fillRoundRect(healthBarX, healthBarY, (int) (health * (statusBarWidth / 100.0)), statusBarHeight, cornerRadius, cornerRadius);
-        g2.setColor(Color.BLACK);
-        g2.drawRoundRect(healthBarX, healthBarY, statusBarWidth, statusBarHeight, cornerRadius, cornerRadius);
-
-        // Draw hunger bar
-        int hungerBarX = 20;
-        int hungerBarY = 340;
-        GradientPaint hungerGradient = new GradientPaint(0, hungerBarY, Color.ORANGE, 0, hungerBarY + statusBarHeight,
-                Color.GRAY);
-
-        g2.setPaint(hungerGradient);
-        g2.fillRoundRect(hungerBarX, hungerBarY, (int) (hunger * (statusBarWidth / 100.0)), statusBarHeight, cornerRadius, cornerRadius);
-        g2.setColor(Color.BLACK);
-        g2.drawRoundRect(hungerBarX, hungerBarY, statusBarWidth, statusBarHeight, cornerRadius, cornerRadius);
-
-        // Draw happiness bar
-        int happinessBarX = 20;
-        int happinessBarY = 370;
-
-        GradientPaint happinessGradient = new GradientPaint(0, happinessBarY, Color.GREEN, 0, happinessBarY + statusBarHeight, Color.GRAY);
-
-
-        g2.setPaint(happinessGradient);
-        g2.fillRoundRect(happinessBarX, happinessBarY, (int) (happiness * (statusBarWidth / 100.0)), statusBarHeight, cornerRadius, cornerRadius);
-        g2.setColor(Color.BLACK);
-        g2.drawRoundRect(happinessBarX, happinessBarY, statusBarWidth, statusBarHeight, cornerRadius, cornerRadius);
-
-        g2.setColor(Color.BLACK);
-        FontMetrics fm = g2.getFontMetrics();
-        int labelHeight = fm.getHeight();
-
-        // Draw health label
-        String healthLabel = "Health: " + health;
-        int labelWidth = fm.stringWidth(healthLabel);
-        int labelX = healthBarX + (statusBarWidth - labelWidth) / 2;
-        int labelY = healthBarY + (statusBarHeight - labelHeight) / 2 + fm.getAscent();
-        g2.drawString(healthLabel, labelX, labelY);
-
-        // Draw hunger label
-        String hungerLabel = "Hunger: " + hunger;
-        labelWidth = fm.stringWidth(hungerLabel);
-        labelX = hungerBarX + (statusBarWidth - labelWidth) / 2;
-        labelY = hungerBarY + (statusBarHeight - labelHeight) / 2 + fm.getAscent();
-        g2.drawString(hungerLabel, labelX, labelY);
-
-        // Draw happiness label
-        String happinessLabel = "Happiness: " + happiness;
-        labelWidth = fm.stringWidth(happinessLabel);
-        labelX = happinessBarX + (statusBarWidth - labelWidth) / 2;
-        labelY = happinessBarY + (statusBarHeight - labelHeight) / 2 + fm.getAscent();
-        g2.drawString(happinessLabel, labelX, labelY);
-    }
-
-}
-
 package main;
 
 import java.awt.*;
@@ -154,6 +20,7 @@ public class playerUI extends JPanel {
     private int happinessDecreaseCounter = 0;
     private gamePanel gamePanel;
     private JButton shopButton;
+    private JButton miniGameButton;
     private Timer timer;
 
     public playerUI(gamePanel gamePanel) {
@@ -163,13 +30,19 @@ public class playerUI extends JPanel {
         this.setLayout(new BorderLayout());
         this.gamePanel = gamePanel;
 
-        // Initialize shop button and open shop window on click
-        shopButton = new JButton("Shop"); // Set button text to "Shop"
-        shopButton.setPreferredSize(new Dimension(100, 50));
-        shopButton.setFocusPainted(false);
-        shopButton.setOpaque(false);
+        // Create a new panel for holding the buttons
+        JPanel buttonPanel = new JPanel();
+        int hGap = 20; // Horizontal gap between components
+        int vGap = 20; // Vertical gap between components
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, hGap, vGap));
+        buttonPanel.setOpaque(false);
 
-        this.add(shopButton, BorderLayout.NORTH);
+        // Initialize shop button and open shop window on click
+        shopButton = new JButton("Shop");
+        shopButton.setPreferredSize(new Dimension(100, 30));
+        shopButton.setFocusPainted(false);
+
+        buttonPanel.add(shopButton);
 
         shopButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -178,6 +51,26 @@ public class playerUI extends JPanel {
                 shopWindow.setVisible(true);
             }
         });
+
+        // Initialize mini-game button and open mini-game window on click
+        miniGameButton = new JButton("Mini Game");
+        miniGameButton.setPreferredSize(new Dimension(100, 30));
+        miniGameButton.setFocusPainted(false);
+
+        buttonPanel.add(miniGameButton);
+
+        miniGameButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Jeff");
+                minigame snakeGame = new minigame(gamePanel);
+                snakeGame.setVisible(true);
+
+            }
+        });
+
+        // Add the button panel to the main panel
+        this.add(buttonPanel, BorderLayout.NORTH);
+
         // Initialize the timer
         int initialDelay = 1000; // 1000 milliseconds = 1 second
         int delayBetweenCalls = 1000; // Decrease the bars every second
@@ -207,9 +100,6 @@ public class playerUI extends JPanel {
             updateHappiness(happiness - happinessDecrease);
         }
     }
-
-
-
 
     public void updateHealth(int health) {
         this.health = health;
@@ -290,4 +180,3 @@ public class playerUI extends JPanel {
         g2.drawString(happinessLabel, labelX, labelY);
     }
 }
-
