@@ -35,12 +35,24 @@ public class gamePanel extends JPanel implements Runnable {
         this.setBackground(sky);
         this.setDoubleBuffered(true); // May improve performance
         this.addKeyListener(kh);
-        this.add(UI);
+
+        // Set the layout manager to GridBagLayout
+        this.setLayout(new GridBagLayout());
+
+        // Set up constraints for UI
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+
+        this.add(UI, gbc); // Add UI with constraints
         this.setFocusable(true);
         // Load Cloud images
-        ImageIcon cloudIcon1 = new ImageIcon("images/cloud_01.png");
-        ImageIcon cloudIcon2 = new ImageIcon("images/cloud_02.png");
-        ImageIcon cloudIcon3 = new ImageIcon("images/cloud_03.png");
+        ImageIcon cloudIcon1 = new ImageIcon("res/cloud_01.png");
+        ImageIcon cloudIcon2 = new ImageIcon("res/cloud_02.png");
+        ImageIcon cloudIcon3 = new ImageIcon("res/cloud_03.png");
         cloud1 = cloudIcon1.getImage();
         cloud2 = cloudIcon2.getImage();
         cloud3 = cloudIcon3.getImage();
@@ -99,7 +111,7 @@ public class gamePanel extends JPanel implements Runnable {
             isJumping = true;
             petY -= jumpHeight;
             jumpSpeed = -10;
-            File file = new File("main/jump.wav");
+            File file = new File("res/jump.wav");
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
             Clip clip = AudioSystem.getClip();
             clip.open(audioStream);
@@ -117,7 +129,7 @@ public class gamePanel extends JPanel implements Runnable {
         }
         // Make Noise
         if (kh.speakPressed == true) {
-            File file = new File("main/eevee.wav");
+            File file = new File("res/eevee.wav");
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
             Clip clip = AudioSystem.getClip();
             clip.open(audioStream);
@@ -133,27 +145,36 @@ public class gamePanel extends JPanel implements Runnable {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
+
+        int panelWidth = this.getWidth();
+        int panelHeight = this.getHeight();
+
         // Draw Grass
         g2.setColor(new Color(16, 199, 59));
-        g2.fillRect(0, 400, 1024, 300);
+        g2.fillRect(0, (int)(panelHeight * 0.7), panelWidth, (int)(panelHeight * 0.3));
+
         // Draw cloud images
-        drawImageCloud(g2, cloud1, 120, 70, 200, 100);
-        drawImageCloud(g2, cloud2, 450, 120, 200, 100);
-        drawImageCloud(g2, cloud3, 750, 70, 190, 110);
+        drawImageCloud(g2, cloud1, (int)(panelWidth * 0.117), (int)(panelHeight * 0.1215), (int)(panelWidth * 0.195), (int)(panelHeight * 0.1736));
+        drawImageCloud(g2, cloud2, (int)(panelWidth * 0.4395), (int)(panelHeight * 0.2083), (int)(panelWidth * 0.195), (int)(panelHeight * 0.1736));
+        drawImageCloud(g2, cloud3, (int)(panelWidth * 0.7325), (int)(panelHeight * 0.1215), (int)(panelWidth * 0.1855), (int)(panelHeight * 0.1909));
+
         // Draw eevee
         ImageIcon ii = new ImageIcon("res/windowIcon.png");
         Image eevee = ii.getImage();
-        g2.drawImage(eevee, petX, petY, 64 * 4, 64 * 4, null);
+        int eeveeWidth = (int)(panelWidth * 0.25);
+        int eeveeHeight = (int)(panelHeight * 0.444);
+        g2.drawImage(eevee, petX, petY, eeveeWidth, eeveeHeight, null);
 
         // Draw Currency label
         g2.setColor(Color.BLACK);
-        g2.setFont(new Font("Arial", Font.BOLD, 26));
-        g2.drawString("Money: " + currency.balance, 456, 560);
+        g2.setFont(new Font("Arial", Font.BOLD, (int)(panelHeight * 0.0451))); // Scale font size based on panel height
+        g2.drawString("Money: " + currency.balance, (int)(panelWidth * 0.445), (int)(panelHeight * 0.972));
 
         // Draw UI
         UI.paint(g2);
 
         g2.dispose();
     }
+
 }
 

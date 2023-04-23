@@ -1,3 +1,4 @@
+/*
 package main;
 
 import javax.swing.*;
@@ -27,3 +28,4 @@ public class Action extends JPanel{
     setSize(300,200);
     setVisible(true);
 }
+*/
