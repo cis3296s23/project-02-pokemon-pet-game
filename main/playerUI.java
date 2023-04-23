@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -33,14 +34,31 @@ public class playerUI extends JPanel {
         // Create a new panel for holding the buttons
         JPanel buttonPanel = new JPanel();
         int hGap = 20; // Horizontal gap between components
-        int vGap = 20; // Vertical gap between components
-        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, hGap, vGap));
+        int vGap = 10; // Vertical gap between components
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.LEFT, hGap, vGap));
         buttonPanel.setOpaque(false);
 
-        // Initialize shop button and open shop window on click
-        shopButton = new JButton("Shop");
-        shopButton.setPreferredSize(new Dimension(100, 30));
+//        // Initialize shop button and open shop window on click
+//        shopButton = new JButton();
+//        shopButton.setIcon(new ImageIcon("res/shop.png"));
+//        shopButton.setPreferredSize(new Dimension(50, 50));
+//        shopButton.setFocusPainted(false);
+//        shopButton.setContentAreaFilled(false);
+//        shopButton.setBorderPainted(false);
+        // Initialize shop icon button and open shop widow on click
+        shopButton = new JButton();
+        shopButton.setPreferredSize(new Dimension(50, 50));
+        shopButton.setBorderPainted(false);
+        shopButton.setContentAreaFilled(false);
         shopButton.setFocusPainted(false);
+        shopButton.setOpaque(false);
+
+        // Set the shop icon
+        URL location = getClass().getResource("/res/shop.png");
+        ImageIcon shopIcon = new ImageIcon(location);
+        Image scaledImage = shopIcon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+        shopIcon = new ImageIcon(scaledImage);
+        shopButton.setIcon(shopIcon);
 
         buttonPanel.add(shopButton);
 
@@ -53,9 +71,24 @@ public class playerUI extends JPanel {
         });
 
         // Initialize mini-game button and open mini-game window on click
-        miniGameButton = new JButton("Mini Game");
-        miniGameButton.setPreferredSize(new Dimension(100, 30));
+//        miniGameButton = new JButton("Mini Game");
+//        miniGameButton.setPreferredSize(new Dimension(100, 30));
+//        miniGameButton.setFocusPainted(false);
+
+        // Initialize mini-game icon button and open mini-game window on click
+        miniGameButton = new JButton();
+        miniGameButton.setPreferredSize(new Dimension(50,50));
+        miniGameButton.setBorderPainted(false);
+        miniGameButton.setContentAreaFilled(false);
         miniGameButton.setFocusPainted(false);
+        miniGameButton.setOpaque(false);
+
+        // Set the snake game icon
+        URL location1 = getClass().getResource("/res/snake.png");
+        ImageIcon snakeGameIcon = new ImageIcon(location1);
+        Image scaledImage1 = snakeGameIcon.getImage().getScaledInstance(50,50, Image.SCALE_SMOOTH);
+        snakeGameIcon = new ImageIcon(scaledImage1);
+        miniGameButton.setIcon(snakeGameIcon);
 
         buttonPanel.add(miniGameButton);
 
@@ -89,15 +122,15 @@ public class playerUI extends JPanel {
         int hungerDecrease = 1; // Adjust this value to change the rate of hunger decrease
         int happinessDecrease = 1; // Adjust this value to change the rate of happiness decrease
 
-        updateHealth(health - healthDecrease);
-        updateHunger(hunger - hungerDecrease);
+        updateHealth(Math.max(health - healthDecrease, 0));
+        updateHunger(Math.max(hunger - hungerDecrease, 0));
 
         // Update the happinessDecreaseCounter
         happinessDecreaseCounter++;
 
         // Decrease happiness every 3 ticks
         if (happinessDecreaseCounter % 3 == 0) {
-            updateHappiness(happiness - happinessDecrease);
+            updateHappiness(Math.max(happiness - happinessDecrease, 0));
         }
     }
 
