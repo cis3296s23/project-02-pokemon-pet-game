@@ -13,7 +13,7 @@ public class main {
         ImageIcon windowIcon = new ImageIcon("res/windowIcon.png");
         window.setIconImage(windowIcon.getImage());
         window.setTitle("Pokemon Pet Game");
-        window.setLocationRelativeTo((Component)null);
+        window.setLocationRelativeTo((Component) null);
         window.setVisible(true);
         gamePanel gamePanel = new gamePanel();
         window.add(gamePanel);

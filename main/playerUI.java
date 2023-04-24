@@ -38,13 +38,13 @@ public class playerUI extends JPanel {
         buttonPanel.setLayout(new FlowLayout(FlowLayout.LEFT, hGap, vGap));
         buttonPanel.setOpaque(false);
 
-//        // Initialize shop button and open shop window on click
-//        shopButton = new JButton();
-//        shopButton.setIcon(new ImageIcon("res/shop.png"));
-//        shopButton.setPreferredSize(new Dimension(50, 50));
-//        shopButton.setFocusPainted(false);
-//        shopButton.setContentAreaFilled(false);
-//        shopButton.setBorderPainted(false);
+        // // Initialize shop button and open shop window on click
+        // shopButton = new JButton();
+        // shopButton.setIcon(new ImageIcon("res/shop.png"));
+        // shopButton.setPreferredSize(new Dimension(50, 50));
+        // shopButton.setFocusPainted(false);
+        // shopButton.setContentAreaFilled(false);
+        // shopButton.setBorderPainted(false);
         // Initialize shop icon button and open shop widow on click
         shopButton = new JButton();
         shopButton.setPreferredSize(new Dimension(50, 50));
@@ -71,13 +71,13 @@ public class playerUI extends JPanel {
         });
 
         // Initialize mini-game button and open mini-game window on click
-//        miniGameButton = new JButton("Mini Game");
-//        miniGameButton.setPreferredSize(new Dimension(100, 30));
-//        miniGameButton.setFocusPainted(false);
+        // miniGameButton = new JButton("Mini Game");
+        // miniGameButton.setPreferredSize(new Dimension(100, 30));
+        // miniGameButton.setFocusPainted(false);
 
         // Initialize mini-game icon button and open mini-game window on click
         miniGameButton = new JButton();
-        miniGameButton.setPreferredSize(new Dimension(50,50));
+        miniGameButton.setPreferredSize(new Dimension(50, 50));
         miniGameButton.setBorderPainted(false);
         miniGameButton.setContentAreaFilled(false);
         miniGameButton.setFocusPainted(false);
@@ -86,7 +86,7 @@ public class playerUI extends JPanel {
         // Set the snake game icon
         URL location1 = getClass().getResource("/res/snake.png");
         ImageIcon snakeGameIcon = new ImageIcon(location1);
-        Image scaledImage1 = snakeGameIcon.getImage().getScaledInstance(50,50, Image.SCALE_SMOOTH);
+        Image scaledImage1 = snakeGameIcon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
         snakeGameIcon = new ImageIcon(scaledImage1);
         miniGameButton.setIcon(snakeGameIcon);
 
@@ -122,15 +122,15 @@ public class playerUI extends JPanel {
         int hungerDecrease = 1; // Adjust this value to change the rate of hunger decrease
         int happinessDecrease = 1; // Adjust this value to change the rate of happiness decrease
 
-        updateHealth(Math.max(health - healthDecrease, 0));
+        updateHappiness(Math.max(happiness - happinessDecrease, 0));
         updateHunger(Math.max(hunger - hungerDecrease, 0));
 
         // Update the happinessDecreaseCounter
-        happinessDecreaseCounter++;
+        // happinessDecreaseCounter++;
 
         // Decrease happiness every 3 ticks
-        if (happinessDecreaseCounter % 3 == 0) {
-            updateHappiness(Math.max(happiness - happinessDecrease, 0));
+        if (this.hunger == 0 || this.happiness == 0) {
+            updateHealth(Math.max(health - healthDecrease, 0));
         }
     }
 
@@ -160,30 +160,36 @@ public class playerUI extends JPanel {
         // Draw health bar
         int healthBarX = 20;
         int healthBarY = 310;
-        GradientPaint healthGradient = new GradientPaint(0, healthBarY, Color.RED, 0, healthBarY + statusBarHeight, Color.RED);
+        GradientPaint healthGradient = new GradientPaint(0, healthBarY, Color.RED, 0, healthBarY + statusBarHeight,
+                Color.RED);
 
         g2.setPaint(healthGradient);
-        g2.fillRoundRect(healthBarX, healthBarY, (int) (health * (statusBarWidth / 100.0)), statusBarHeight, cornerRadius, cornerRadius);
+        g2.fillRoundRect(healthBarX, healthBarY, (int) (health * (statusBarWidth / 100.0)), statusBarHeight,
+                cornerRadius, cornerRadius);
         g2.setColor(Color.BLACK);
         g2.drawRoundRect(healthBarX, healthBarY, statusBarWidth, statusBarHeight, cornerRadius, cornerRadius);
 
         // Draw hunger bar
         int hungerBarX = 20;
         int hungerBarY = 340;
-        GradientPaint hungerGradient = new GradientPaint(0, hungerBarY, Color.ORANGE, 0, hungerBarY + statusBarHeight, Color.GRAY);
+        GradientPaint hungerGradient = new GradientPaint(0, hungerBarY, Color.ORANGE, 0, hungerBarY + statusBarHeight,
+                Color.GRAY);
 
         g2.setPaint(hungerGradient);
-        g2.fillRoundRect(hungerBarX, hungerBarY, (int) (hunger * (statusBarWidth / 100.0)), statusBarHeight, cornerRadius, cornerRadius);
+        g2.fillRoundRect(hungerBarX, hungerBarY, (int) (hunger * (statusBarWidth / 100.0)), statusBarHeight,
+                cornerRadius, cornerRadius);
         g2.setColor(Color.BLACK);
         g2.drawRoundRect(hungerBarX, hungerBarY, statusBarWidth, statusBarHeight, cornerRadius, cornerRadius);
 
         // Draw happiness bar
         int happinessBarX = 20;
         int happinessBarY = 370;
-        GradientPaint happinessGradient = new GradientPaint(0, happinessBarY, Color.GREEN, 0, happinessBarY + statusBarHeight, Color.GRAY);
+        GradientPaint happinessGradient = new GradientPaint(0, happinessBarY, Color.GREEN, 0,
+                happinessBarY + statusBarHeight, Color.GRAY);
 
         g2.setPaint(happinessGradient);
-        g2.fillRoundRect(happinessBarX, happinessBarY, (int) (happiness * (statusBarWidth / 100.0)), statusBarHeight, cornerRadius, cornerRadius);
+        g2.fillRoundRect(happinessBarX, happinessBarY, (int) (happiness * (statusBarWidth / 100.0)), statusBarHeight,
+                cornerRadius, cornerRadius);
         g2.setColor(Color.BLACK);
         g2.drawRoundRect(happinessBarX, happinessBarY, statusBarWidth, statusBarHeight, cornerRadius, cornerRadius);
 
