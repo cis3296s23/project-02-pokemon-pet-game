@@ -3,23 +3,14 @@ package main;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
 import java.net.URL;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
-import javax.swing.plaf.DimensionUIResource;
 
 public class playerUI extends JPanel {
     int health = 100;
     int hunger = 100;
     int happiness = 100;
-    private int happinessDecreaseCounter = 0;
-    private gamePanel gamePanel;
+    public gamePanel gamePanel;
     private JButton shopButton;
     private JButton miniGameButton;
     private Timer timer;
@@ -38,13 +29,6 @@ public class playerUI extends JPanel {
         buttonPanel.setLayout(new FlowLayout(FlowLayout.LEFT, hGap, vGap));
         buttonPanel.setOpaque(false);
 
-//        // Initialize shop button and open shop window on click
-//        shopButton = new JButton();
-//        shopButton.setIcon(new ImageIcon("res/shop.png"));
-//        shopButton.setPreferredSize(new Dimension(50, 50));
-//        shopButton.setFocusPainted(false);
-//        shopButton.setContentAreaFilled(false);
-//        shopButton.setBorderPainted(false);
         // Initialize shop icon button and open shop widow on click
         shopButton = new JButton();
         shopButton.setPreferredSize(new Dimension(50, 50));
@@ -69,11 +53,6 @@ public class playerUI extends JPanel {
                 shopWindow.setVisible(true);
             }
         });
-
-        // Initialize mini-game button and open mini-game window on click
-//        miniGameButton = new JButton("Mini Game");
-//        miniGameButton.setPreferredSize(new Dimension(100, 30));
-//        miniGameButton.setFocusPainted(false);
 
         // Initialize mini-game icon button and open mini-game window on click
         miniGameButton = new JButton();
@@ -118,6 +97,7 @@ public class playerUI extends JPanel {
     }
 
     private void decreaseBars() {
+        int happinessDecreaseCounter = 0;
         int healthDecrease = 1; // Adjust this value to change the rate of health decrease
         int hungerDecrease = 1; // Adjust this value to change the rate of hunger decrease
         int happinessDecrease = 1; // Adjust this value to change the rate of happiness decrease
