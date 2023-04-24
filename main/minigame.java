@@ -5,7 +5,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class minigame extends JFrame{
-    private gamePanel gamePanel;
+    public gamePanel gamePanel;
 
     minigame(gamePanel gamePanel){
         this.gamePanel = gamePanel;

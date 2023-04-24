@@ -5,7 +5,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 public class main {
-
     public static void main(String[] args) {
         JFrame window = new JFrame();
         window.setDefaultCloseOperation(3);
@@ -19,6 +18,5 @@ public class main {
         window.add(gamePanel);
         window.pack();
         gamePanel.startGameThread();
-
     }
 }

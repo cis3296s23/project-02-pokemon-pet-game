@@ -1,7 +1,3 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
 package main;
 
 import java.awt.*;
@@ -16,19 +12,16 @@ public class gamePanel extends JPanel implements Runnable {
     public int petX = 512;
     public int petY = 230;
     public int petSpeed = 10;
-    public double jumpSpeed = -10;
-    public boolean isJumping = false;
     private Image cloud1;
     private Image cloud2;
     private Image cloud3;
     public keyHandler kh = new keyHandler();
     public playerUI UI = new playerUI(this);
 
-    private JLabel currencyLabel;
-
     public void drawImageCloud(Graphics2D g2, Image cloud, int x, int y, int width, int height) {
         g2.drawImage(cloud, x, y, width, height, null);
     }
+
     public gamePanel() {
         this.setPreferredSize(new DimensionUIResource(1024, 576));
         Color sky = new Color(28, 235, 235);
@@ -86,7 +79,6 @@ public class gamePanel extends JPanel implements Runnable {
                 try {
                     update(TIME_STEP);
                 } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
                 accumulatedTime -= TIME_STEP;
@@ -95,8 +87,11 @@ public class gamePanel extends JPanel implements Runnable {
         }
     }
     public void update(double timeStep) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+        boolean isJumping = false;
         int gravity = 15;
         int jumpHeight = 10;
+        double jumpSpeed = -10;
+
         // Move to the left
         if (kh.leftPressed == true) {
             petX = petX - petSpeed;
