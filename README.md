@@ -1,4 +1,9 @@
+![image](https://user-images.githubusercontent.com/72032695/227060129-f106fff4-6c99-4cd3-9419-e91013796136.png)
+
 # Project Proposal
+
+## Presented by:
+Michael Ewing, Harsh Patel, Joseph Shiller, Rachel To
 
 ## Project Abstract
 The virtual Pokémon pet game is a virtual online pokemon collecting game with a focus on raising and caring for your virtual pokemon.  Your pokemon pet will have three status bars, happiness, hunger, and health.  You will have to keep your pet alive and happy through playing with it and feeding it.  You will be able to pick an initial pokemon to raise and expand your collection of pokemon through unlocking and trading.  With your pet you are able to play mini games in order to gain experience points and level it up.  Minigames will include snake, pong, and potentially a couple more.  The game will have a shop where you can buy items such as food and toys using the currency you earned from the minigames.
@@ -14,8 +19,6 @@ https://github.com/mtala3t/Super-Mario-Java-2D-Game
 ## Required Resources
 IDE of choice (Intellji, NetBeans, VSCode, etc)
 Java SDK
-
-![image](https://user-images.githubusercontent.com/72032695/227060129-f106fff4-6c99-4cd3-9419-e91013796136.png)
 
 # Project Design
 
@@ -44,19 +47,24 @@ FOR anyone with an interest in pokemon or pet simulation games WHO want more con
 - Sarah is excited about the idea of having her own virtual Pokémon and being able to raise and care for it. She is interested in the game's ability to unlock and trade new Pokémon. She enjoys playing mini-games and is looking for a fun way to level up her Pokémon and increase her virtual currency. She wants to connect with other players who share her passion for Pokémon and trading virtual Pokémon with them.
 - Sarah's primary goal is to collect and care for a variety of virtual Pokémon. She wants to have a fun and engaging experience while doing so and is looking for a game that offers a variety of features and mini games. She is interested in trading virtual Pokémon with other players and connecting with them through the game's online community. She also wants to use the game as a way to relax and unwind after a long day at work.
 
+INCLUDE CLASS DIAGRAM WITH EXPLAINATION LATER
+
+## Sequence Diagram - User Jumping then Speaking
+![User Jumping then Speaking drawio (1)](https://user-images.githubusercontent.com/91653380/233898612-4a3ede6a-a993-4d71-a052-28b4a86ba533.png)
+
+In this UML Sequence Diagram we first see the dispatch of the main function being created. Next as we start main, we start the game thread in the gamePanel class where all other classes are derived from. Additionally we start the thread and run so that the playerUI generates an accurate frame of the game. Next we have the player press a key which the KeyHandler class recognizes and its value is sent to the gamePanel class to jump the pet, make a sound effect and update/repaint the next frame. Finally we have the player press a key which the KeyHandler class recognizes and its value is sent to the gamePanel class to output a speaking sound effect and update/repaint the next frame.
+
+## Sequence Diagram - User Opening Shop Menu
+![User Opening Shop Menu drawio](https://user-images.githubusercontent.com/91653380/233898756-509cdc4a-7289-4fa3-b953-34b42269f89e.png)
+
+In this UML Sequence Diagram we first see the dispatch of the main function being created. Next as we start main, we start the game thread in the gamePanel class where all other classes are derived from. Additionally we start the thread and run so that the playerUI generates an accurate frame of the game. Then inside of the playerUI class we use an ActionListener function that detects when the user has interacted with a button, in this case it’s the shop class. Finally since the button has been pressed, it will return all the way to main to ask it create/generate a complete new JFrame for the user.
+
+# Testing
+## Automated Test Results
+![image](https://user-images.githubusercontent.com/91653380/233899145-fe21748a-df94-4631-867b-b1575c42dbaa.png)
+In this testing screenshot, the methods are testing the keyhandler and whether or not the key functions (left, right, speak and space) are working correctly.
+
 # How to run
 - Download the latest JDK kit form java's offical site. 
-- Compile the program.
-- Run the program.
-- You will see the GUI for the Pokemon pet game appear! 
-
-# How to contribute
-Follow this project board to know the latest status of the project: [http://...]([http://...])  
-
-### How to build
-- Use this github repository: ... 
-- Specify what branch to use for a more stable release or for cutting edge development.  
-- Use InteliJ 11
-- Specify additional library to download if needed 
-- What file and target to compile and run. 
-- What is expected to happen when the app start. 
+- Compile and run main.java
+- Enjoy the game!
