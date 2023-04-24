@@ -64,7 +64,6 @@ public class playerUI extends JPanel {
 
         shopButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("My name Jeff");
                 shop shopWindow = new shop(gamePanel);
                 shopWindow.setVisible(true);
             }
@@ -94,7 +93,6 @@ public class playerUI extends JPanel {
 
         miniGameButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Jeff");
                 minigame snakeGame = new minigame(gamePanel);
                 snakeGame.setVisible(true);
 
