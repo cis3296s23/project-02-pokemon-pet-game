@@ -168,7 +168,7 @@ public class gamePanel extends JPanel implements Runnable {
         // Draw Currency label
         g2.setColor(Color.BLACK);
         g2.setFont(new Font("Arial", Font.BOLD, (int)(panelHeight * 0.0451))); // Scale font size based on panel height
-        g2.drawString("Money: " + currency.balance, (int)(panelWidth * 0.445), (int)(panelHeight * 0.972));
+        g2.drawString("Money: $" + currency.balance, (int)(panelWidth * 0.445), (int)(panelHeight * 0.972));
 
         // Draw UI
         UI.paint(g2);
