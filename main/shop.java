@@ -43,7 +43,7 @@ public class shop extends JFrame {
         // Food items
         JPanel foodItems = createCategoryPanel("Food");
         foodItems.add(createShopItem
-                ("Buy Cookie",
+                ("Buy Cookie: $2",
                         "/res/cookie.png",
                         "Delicious cookie - Price: $2",
                         2,
@@ -51,7 +51,7 @@ public class shop extends JFrame {
                                 shopActions.increaseHunger(4);
                 }));
         foodItems.add(createShopItem
-                ("Buy Apple",
+                ("Buy Apple: $5",
                         "/res/apple.png",
                         "Fresh apple - Price: $5",
                         5,
@@ -64,7 +64,7 @@ public class shop extends JFrame {
         // Toy items
         JPanel toyItems = createCategoryPanel("Toys");
         toyItems.add(createShopItem
-                ("Buy Ball",
+                ("Buy Ball: $10",
                         "/res/ball.png",
                         "Bouncy ball - Price: $10",
                         10,
@@ -73,7 +73,7 @@ public class shop extends JFrame {
                                 shopActions.increaseHappiness(4);
                         }));
         toyItems.add(createShopItem
-                ("Buy Trampoline",
+                ("Buy Trampoline: $30",
                         "/res/trampoline.png",
                         "Fun trampoline - Price: $30",
                         30,
@@ -86,7 +86,7 @@ public class shop extends JFrame {
         // Pokemon
         JPanel pokemonItems = createCategoryPanel("Pokemon");
         pokemonItems.add(createShopItem
-                ("Buy Pikachu",
+                ("Buy Pikachu: $100",
                         "/res/pikachu.png",
                         "Cute Pikachu - Price: $100",
                         100,
@@ -96,7 +96,7 @@ public class shop extends JFrame {
                                 shopActions.increaseHealth(50);
                         }));
         pokemonItems.add(createShopItem
-                ("Buy Squirtle",
+                ("Buy Squirtle: $80",
                         "/res/squirtle.png",
                         "Cool Squirtle - Price: $80",
                         80,
